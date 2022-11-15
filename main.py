@@ -30,15 +30,12 @@ def home():
                 html = f.read()
                 count += 1
                 return html
-            # button pressed?
         # if count is even and < 10: B
         else:
             with open("indexB.html") as f:
                 html = f.read()
                 count += 1
                 return html
-        
-            # button pressed?
     if countA >= countB:
         with open("index.html") as f:
                 html = f.read()
@@ -59,7 +56,7 @@ def dashboard1():
         ax.set_xlabel("writing score")
         ax.set_ylabel("reading score")
         plt.tight_layout()
-        f = io.BytesIO()
+        f = io.BytesIO() # save file
         fig.savefig(f, format = "svg")
         plt.close(fig)
     else:
@@ -69,7 +66,7 @@ def dashboard1():
         ax.set_xlabel("writing score")
         ax.set_ylabel("math score")
         plt.tight_layout()
-        f = io.BytesIO()
+        f = io.BytesIO() # save file
         fig.savefig(f, format = "svg")
         plt.close(fig)
     return flask.Response(f.getvalue(), headers={"Content-Type": "image/svg+xml"})
@@ -77,7 +74,7 @@ def dashboard1():
 @app.route("/dashboard_2.svg")
 def dashboard2():
     fig, ax = plt.subplots(figsize = (5,5))
-# list of math score with and without test prep
+    # list of math score with and without test prep
     scores_with_prep = []
     scores_without_prep = []
     for index, row in df.iterrows():
@@ -151,7 +148,6 @@ def donate():
             countB+=1
     with open("donate.html") as f:
         html = f.read()
-
     return html
 
 @app.route('/email', methods=["POST"])
